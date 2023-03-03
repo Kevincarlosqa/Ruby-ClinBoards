@@ -13,31 +13,21 @@ class Card
 
     end
 
+    def update(id)
+      @title = id[:title] unless id[:title].empty?
+      @members = id[:members] unless id[:members].empty?
+      @labels = id[:labels] unless id[:labels].empty?
+      @due_date = id[:due_date] unless id[:due_date].empty?
+    end
+
     private
 
     def next_id
         @@id_count += 1
     end
+
+    
+
 end
 
-# data = {id: 1,
-# title:"Check terminal-table gem",
-# members:["Diego", "Deyvi", "Wences"],
-# labels:["investigate"],
-# due_date:"2023-02-19",
-# check_list:[
-#     {
-#       "title": "Add gem to gemfile",
-#       "completed": true
-#     },
-#     {
-#       "title": "Make an example and share with the team",
-#       "completed": false
-#     },
-#     {
-#       "title": "Ask if this feature is mandatory",
-#       "completed": true
-#     }
-#   ]
-# }
-# card1 = Card.new(**data)
+
