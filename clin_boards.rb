@@ -1,12 +1,15 @@
 class ClinBoards
   def initialize
-    # Complete this
+    @store = Store.new(store)
+    @boards = @store.boards
   end
 
-  def start
-    # Complete this
-  end
+# Board Methods
+
+ 
 end
+
+
 
 # get the command-line arguments if neccesary
 app = ClinBoards.new
