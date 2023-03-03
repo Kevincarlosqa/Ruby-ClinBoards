@@ -17,9 +17,9 @@ class Board
     @name = name if name && !name.empty?
     @description = description if description && !description.empty?
   end
-  def find_list(id)
-    @lists.find {|list| list.id == id}
-  end
+  # def find_list(name)
+  #   @lists.find {|list| list.name == name}
+  # end
   private
 
   def load_lists(listas)
