@@ -7,16 +7,24 @@ class Board
     @name = name
     @description = description
     @lists = load_lists(lists)
-    p @id
-    p @name
-    p @description
+    # p @id
+    # p @name
+    # p @description
     # p @lists
   end
 
+  def update(name:nil , description:nil)
+    @name = name if name && !name.empty?
+    @description = description if description && !description.empty?
+  end
+  def find_list(id)
+    @lists.find {|list| list.id == id}
+  end
   private
 
   def load_lists(listas)
     listas.map { |lista| Lists.new(**lista)}
   end
+
 
 end
