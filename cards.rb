@@ -1,8 +1,7 @@
 class Cards 
     @@id_count = 0
     def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
-      @@id_count += 1
-      @id = @@id_count
+      @id = next_id(id)
       @title = title
       @members = members
       @labels = labels
@@ -22,12 +21,16 @@ class Cards
 
     private
 
-    def next_id
+    def next_id(id)
+      if id
+        @@id_count = [@@id_count, id].max
+        return id
+      else
         @@id_count += 1
+      end
+  
+      @@id_count
     end
-
-    
-
 end
 
 

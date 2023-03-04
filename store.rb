@@ -6,6 +6,8 @@ class Store
   def initialize(filename)
     @filename = filename
     @board = load
+    # p "-------------"
+    # p @board[0].lists
     # pp @board.id
     # @lists = 
   end
@@ -35,8 +37,9 @@ class Store
 #   end
 
 # # List Methods
-  def find_list(name)
-    @lists.find {|list| list.name == name}
+  def find_list(name,board_id)
+    list_find = find_board(board_id)
+    lista = list_find.lists.find {|list| list.name == name}
   end
   def create_list(list_data, board_id)
     list = find_board(board_id)
@@ -61,8 +64,9 @@ class Store
     save
   end
 
-  def create_card(list_name)
-    @lists.find_list {|list| list.name == list_name}
+  def create_card(list_name,board_id)
+    list = find_list(list_name,board_id)
+    pp list.cards
     # options = 
     # options.split(" | ")
     # puts options
@@ -133,8 +137,8 @@ list_data = {
   name: "ME CAMBIE",
   cards: []
 }
-store.update_list("Todo",list_data, 1)
+# store.update_list("Todo",list_data, 1)
 # store.delete_board(1)
-
+store.create_card("In Progress",1)
 # pp store.board
 # pp store.find_board(1).description

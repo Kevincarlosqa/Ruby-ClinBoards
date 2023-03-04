@@ -1,9 +1,12 @@
 require_relative "lists"
 
 class Board
-  attr_accessor :id, :name, :description, :lists
+  attr_reader :id, :name, :description, :lists
+  
+  @@id_count = 0
+
   def initialize(id: nil, name:, description:, lists: [])
-    @id = id
+    @id = next_id(id)
     @name = name
     @description = description
     @lists = load_lists(lists)
@@ -26,5 +29,15 @@ class Board
     listas.map { |lista| Lists.new(**lista)}
   end
 
+  def next_id(id)
+    if id
+      @@id_count = [@@id_count, id].max
+      return id
+    else
+      @@id_count += 1
+    end
+
+    @@id_count
+  end
 
 end
