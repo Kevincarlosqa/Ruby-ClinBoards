@@ -1,5 +1,6 @@
 class Cards 
     @@id_count = 0
+     attr_reader :id
     def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
       @id = next_id(id)
       @title = title

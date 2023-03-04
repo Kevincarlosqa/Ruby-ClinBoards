@@ -79,20 +79,31 @@ class Store
     due_date = gets.chomp
     cards_data = {id: nil, title: title, members: members, labels: labels, due_date:due_date, checklist:[]}
     list.cards << Cards.new(**cards_data)
-    pp list.cards
     save
 
   end
-  
 
-#   def update_card
+  def find_card(card_id, list_id,board_id)
+    board = find_board(board_id)
+    list = board.lists.find {|list| list.id == list_id}
+    pp list
+    list.cards.delete_if {|card| card.id == card_id}
+    p "----------"
+    pp list
+    # list.cards.find { |card| card.id == card_id }
+  end
+  # def update_card(card_id, board_id)
 
-#     @store.update_card
-#   end
-#   def delete_card
-
-#     @store.delete_card
-#   end
+  # end
+  def delete_card(card_id, list_id, board_id)
+    card_found = find_card(card_id, list_id, board_id)
+    # board_find = find_board(board_id)
+    # p board_find.lists[0].cards
+    # list = find_list(list_name,board_id)
+    # pp card_found.id
+    # card_found
+    # save
+  end
 
 #   def card_checklist(id)
 
@@ -130,6 +141,7 @@ list_data = {
 }
 # store.update_list("Todo",list_data, 1)
 # store.delete_board(1)
-store.create_card("In Progress",1)
+# store.create_card("In Progress",1)
 # pp store.board
 # pp store.find_board(1).description
+store.delete_card(4,2,1)
