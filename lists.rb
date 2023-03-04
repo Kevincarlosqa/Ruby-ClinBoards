@@ -25,6 +25,9 @@ class Lists
   def update(name)
     @name = name if name && !name.empty?
   end
+  def delete_if(&block)
+    @cards.delete_if(&block)
+  end
   private
 
   def load_cards(cards)

@@ -44,6 +44,13 @@ class ClinBoards
     { name: name, description: description }
   end
 
+  def list_form
+    print "Name: "
+    name = gets.chomp
+
+    { name: name }
+  end
+
   def welco
     wel = <<-DELIMETER
 ####################################
@@ -68,22 +75,36 @@ class ClinBoards
     loop do
       @store.list_table(board_id)
       puts list_menu
+      puts card_menu
       print "> "
-      break
-      # option, id = gets.chomp.split # ["create"]
+      option, listname = gets.chomp.split
 
-      # case option
-      # when "create"
-      #   data = list_form
-      #   @store.add_list(data, board_id)
-      # when "update"
-      #   data = list_form
-      #   @store.update_list(id.to_i, data, board_id)
-      # when "delete"
-      #   @store.delete_list(id.to_i, board_id)
-      # when "back"
-      #   break
-      # end
+      if listname.is_a?(String)
+        listname
+      else
+        listname.to_i
+      end
+      
+      case option
+      when "create-list"
+        data = list_form
+        @store.create_list(data, board_id)
+      when "update-list"
+        @store.update_list(listname,board_id)
+      when "delete-list"
+        @store.delete_list(listname , board_id)
+      when "create-card"
+        # data = list_form
+        # @store.create_list(data, board_id)
+      when "checklist"
+        # @store.update_list(listname,board_id)
+      when "update-card"
+        @store.update_card(listname, board_id)
+      when "delete-card"
+        # @store.delete_list(listname , board_id)
+      when "back"
+        break
+      end
     end
   end
 end

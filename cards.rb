@@ -24,7 +24,7 @@ class Cards
 
     def to_a
       #hacer un array con los checklist
-      [@id, @title, @members, @labels, @due_date, []]
+      [@id, @title, @members.join(", "), @labels.join(", "), @due_date, []]
     end
     private
 

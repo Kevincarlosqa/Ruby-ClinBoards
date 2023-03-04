@@ -11,7 +11,8 @@ class Board
     @description = description
     @lists = load_lists(lists)
   end
-
+  def delete_list
+  end
   def find_list_by_id(id)
     @lists.find { |list| list.id == id }
   end
