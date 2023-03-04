@@ -66,29 +66,20 @@ class Store
 
   def create_card(list_name,board_id)
     list = find_list(list_name,board_id)
-    pp list.cards
     # options = 
     # options.split(" | ")
     # puts options
-    title = " "
-    while title.empty?
-      print "title: "
-      title = gets.chomp
-    end
-    members = " "
-    while members.empty?
-      print "members: "
-      members = gets.chomp.split(", ")
-    end
-    labels = " "
-    while labels.empty?
-      print "labels: "
-      labels = gets.chomp
-    end
+    print "title: "
+    title = gets.chomp
+    print "members: "
+    members = gets.chomp.split(", ")
+    print "labels: "
+    labels = gets.chomp
+    print "due_date"
     due_date = gets.chomp
-    
-
-
+    cards_data = {id: nil, title: title, members: members, labels: labels, due_date:due_date, checklist:[]}
+    list.cards << Cards.new(**cards_data)
+    pp list.cards
     save
 
   end
