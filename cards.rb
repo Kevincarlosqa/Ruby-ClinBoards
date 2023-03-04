@@ -1,6 +1,6 @@
 class Cards 
     @@id_count = 0
-     attr_reader :id
+     attr_reader :id, :title, :members, :labels, :due_date, :checklist
     def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
       @id = next_id(id)
       @title = title
@@ -12,7 +12,9 @@ class Cards
       # p @title
 
     end
-
+    def find_card_by_id(id)
+      # card = 
+    end
     def update(id)
       @title = id[:title] unless id[:title].empty?
       @members = id[:members] unless id[:members].empty?
@@ -20,6 +22,10 @@ class Cards
       @due_date = id[:due_date] unless id[:due_date].empty?
     end
 
+    def to_a
+      #hacer un array con los checklist
+      [@id, @title, @members, @labels, @due_date, []]
+    end
     private
 
     def next_id(id)

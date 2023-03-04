@@ -1,7 +1,7 @@
 require_relative "cards"
 
 class Lists
-  attr_reader :id, :name, :cards
+  attr_accessor :id, :name, :cards
 
   @@id_count = 0
 
@@ -14,6 +14,17 @@ class Lists
     # p @cards
   end
 
+  def add_card(card)
+  end
+
+  def find_card(card_id)
+    list = @cards.find { |card| card.id == card_id }
+    p list
+    # .find { |card| card.id == card_id }
+  end
+  def update(name)
+    @name = name if name && !name.empty?
+  end
   private
 
   def load_cards(cards)
@@ -31,3 +42,4 @@ class Lists
     @@id_count
   end
 end
+

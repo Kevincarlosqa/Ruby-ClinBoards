@@ -16,13 +16,25 @@ class Board
     # p @lists
   end
 
-  def update(name:nil , description:nil)
+  def find_list_by_id(id)
+    @lists.find { |list| list.id == id }
+  end
+
+  def find_list_by_name(name)
+    # list_find = find_board(board_id)
+    @lists.find {|list| list.name == name}
+  end
+
+  def update(name)
     @name = name if name && !name.empty?
-    @description = description if description && !description.empty?
   end
   # def find_list(name)
   #   @lists.find {|list| list.name == name}
   # end
+  def to_a
+    #hacer un array con la list
+    [@id, @name, @description, []]
+  end
   private
 
   def load_lists(listas)

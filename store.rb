@@ -1,5 +1,8 @@
 require "json"
+require "terminal-table"
 require_relative "board"
+require_relative "lists"
+require_relative "cards"
 
 class Store
   attr_accessor :board, :filename
@@ -37,26 +40,20 @@ class Store
 #   end
 
 # # List Methods
-  def find_list(name,board_id)
-    list_find = find_board(board_id)
-    lista = list_find.lists.find {|list| list.name == name}
-  end
+  
+
   def create_list(list_data, board_id)
     list = find_board(board_id)
     list.lists << Lists.new(**list_data)
     save
   end
 
-  # def update_list(name, data, board_id)
-  #   p  board_id.to_i
-  #   boar = @board.find_board(board_id)
-  #   p boar
-  #   list = board.find_list(name)
-  #   p "-----------"
-  #   p list
-  #   list.update(**data)
-  #   save
-  # end
+  def update_list(name,board_pos)
+    list = @board[board_pos].find_list_by_name(name)
+    print "Name:"
+    new_name = gets.chomp
+    list.update(new_name)
+  end
 
   def delete_list(name , board_id)
     board = find_board(board_id)
@@ -83,40 +80,59 @@ class Store
 
   end
 
-  def find_card(card_id, list_id,board_id)
+  def update_card(card_id, list_id, board_id)
+    list = @board[board_id].find_list_by_id(list_id)
+    card = list.find_card(card_id)
+    #falta la logica y el terminar el update
+  end
+
+  def delete_card(card_id, list_id,board_id)
     board = find_board(board_id)
     list = board.lists.find {|list| list.id == list_id}
-    pp list
     list.cards.delete_if {|card| card.id == card_id}
-    p "----------"
-    pp list
-    # list.cards.find { |card| card.id == card_id }
-  end
-  # def update_card(card_id, board_id)
-
-  # end
-  def delete_card(card_id, list_id, board_id)
-    card_found = find_card(card_id, list_id, board_id)
-    # board_find = find_board(board_id)
-    # p board_find.lists[0].cards
-    # list = find_list(list_name,board_id)
-    # pp card_found.id
-    # card_found
-    # save
   end
 
 #   def card_checklist(id)
-
 #   end
+
+  def board_table
+    table = Terminal::Table.new
+    table.title = "CLIn Boards"
+    table.headings = ["ID", "Name", "Description", "List(#cards)"]
+    table.rows = @board.map(&:to_a)
+
+    table
+  end
+
+  def list_table(board_id)
+    name = []
+    @board[board_id].lists.each_with_index do |names, index|
+      name << names.name
+    end
+    name.each_with_index do |title, index|
+     
+      table2 = Terminal::Table.new
+      table2.title = title
+      table2.headings = ["ID", "Title", "Members", "Labels", "Due_date","Checklist"]
+      list = @board[board_id].find_list_by_name(title)
+      row = []
+      list.cards.each_with_index do |card, index|
+         row <<  card.to_a
+      end
+      table2.rows = row
+      # table2.rows = cards
+      puts table2
+    end
+    # table.headings = ["ID", "Title", "Members", "Labels", "Due_date","Checklist"]
+    # table.rows = playlist.songs.map(&:to_a)
+
+    # table
+  end
   private
 
   def load
     board_data = JSON.parse(File.read(@filename), symbolize_names:true)
-    # puts board_data
     board_data.map { |board| Board.new(**board) }
-    # p board_data.name
-    # # p board_data.description
-    # # p board_data.lists
   end
 
   def save
@@ -144,4 +160,5 @@ list_data = {
 # store.create_card("In Progress",1)
 # pp store.board
 # pp store.find_board(1).description
-store.delete_card(4,2,1)
+# store.delete_card(4,2,1)
+# store.update_card(9,2,0)
