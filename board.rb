@@ -10,10 +10,6 @@ class Board
     @name = name
     @description = description
     @lists = load_lists(lists)
-    # p @id
-    # p @name
-    # p @description
-    # p @lists
   end
 
   def find_list_by_id(id)
@@ -25,8 +21,9 @@ class Board
     @lists.find {|list| list.name == name}
   end
 
-  def update(name)
+  def update(name: nil, description: nil)
     @name = name if name && !name.empty?
+    @description = description if description && !description.empty?
   end
   # def find_list(name)
   #   @lists.find {|list| list.name == name}

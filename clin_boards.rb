@@ -17,15 +17,15 @@ class ClinBoards
 
       case option
       when "create"
-        # data = playlist_form
-        # @store.add_playlist(data)
+        data = board_form
+        @store.create_board(data)
       when "show"
         show_board(id.to_i)
       when "update"
-        # data = playlist_form
-        # @store.update_playlist(id.to_i, data)
+        data = board_form
+        @store.update_board(id.to_i,data)
       when "delete"
-        # @store.delete_playlist(id.to_i)
+        @store.delete_board(id.to_i)
       when "exit"
         puts "Goodbye!"
         break
@@ -34,6 +34,16 @@ class ClinBoards
   end
       
   private
+
+  def board_form
+    print "Name: "
+    name = gets.chomp
+    print "Description: "
+    description = gets.chomp
+
+    { name: name, description: description }
+  end
+
   def welco
     wel = <<-DELIMETER
 ####################################

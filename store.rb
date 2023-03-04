@@ -9,10 +9,6 @@ class Store
   def initialize(filename)
     @filename = filename
     @board = load
-    # p "-------------"
-    # p @board[0].lists
-    # pp @board.id
-    # @lists = 
   end
 
   def find_board(id)
@@ -21,18 +17,18 @@ class Store
 
   def create_board(board_data)
     @board << Board.new(**board_data)
-    save
+    # save
   end
 
-  # def update_board(id,data)
-  #   board = find_board(id)
-  #   board.update(**data)
-  #   save
-  # end
+  def update_board(id,data)
+    board = find_board(id)
+    board.update(**data)
+    # save
+  end
 
   def delete_board(id)
     @board.delete_if { |board| board.id == id }
-    save
+    # save
   end
 
 #   def show_board
@@ -45,7 +41,7 @@ class Store
   def create_list(list_data, board_id)
     list = find_board(board_id)
     list.lists << Lists.new(**list_data)
-    save
+    # save
   end
 
   def update_list(name,board_pos)
@@ -58,14 +54,11 @@ class Store
   def delete_list(name , board_id)
     board = find_board(board_id)
     board.lists.delete_if {|list| list.name == name}
-    save
+    # save
   end
 
   def create_card(list_name,board_id)
     list = find_list(list_name,board_id)
-    # options = 
-    # options.split(" | ")
-    # puts options
     print "title: "
     title = gets.chomp
     print "members: "
@@ -76,7 +69,7 @@ class Store
     due_date = gets.chomp
     cards_data = {id: nil, title: title, members: members, labels: labels, due_date:due_date, checklist:[]}
     list.cards << Cards.new(**cards_data)
-    save
+    # save
 
   end
 
