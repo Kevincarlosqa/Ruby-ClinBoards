@@ -95,9 +95,12 @@ class ClinBoards
         @store.delete_list(listname , board_id)
       when "create-card"
         # data = list_form
+        create_card(list_name,board_id)
         # @store.create_list(data, board_id)
       when "checklist"
+        @store.card_checklist(listname,board_id)
         # @store.update_list(listname,board_id)
+
       when "update-card"
         @store.update_card(listname, board_id)
       when "delete-card"

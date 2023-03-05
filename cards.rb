@@ -1,5 +1,6 @@
-require_relative "checklists"
-class Cards
+require_relative "checklist"
+
+class Cards 
     @@id_count = 0
      attr_reader :id, :title, :members, :labels, :due_date, :checklist
     def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
@@ -8,8 +9,7 @@ class Cards
       @members = members
       @labels = labels
       @due_date = due_date
-      @checklist = checklist
-
+      @checklist = load_checklist(checklist)
       # p @check_list
       # p @title
 
@@ -27,6 +27,10 @@ class Cards
       [@id, @title, @members.join(", "), @labels.join(", "), @due_date, []]
     end
     private
+
+    def load_checklist(checklist)
+      checklist.map { |check| Checklist.new(**check)}
+    end
 
     def next_id(id)
       if id

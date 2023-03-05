@@ -30,14 +30,7 @@ class Store
     @board.delete_if { |board| board.id == id }
     # save
   end
-
-#   def show_board
-
-#   end
-
-# # List Methods
   
-
   def create_list(list_data, board_id)
     board_id -= 1
     list = @board[board_id]
@@ -54,17 +47,10 @@ class Store
 
   def delete_list(name , board_id)
     board_id -= 1
-  
     list = @board[board_id]
-    p list.lists
-    # p list
+    list.lists
     list.lists.delete_if {|list| list.name == name}
-      # list.
-    
-    # list.name
-    # pp list.methods
-    # list.delete_if {|list| list.name == name}
-    
+
     # save
   end
 
@@ -98,8 +84,14 @@ class Store
     list.cards.delete_if {|card| card.id == card_id}
   end
 
-#   def card_checklist(id)
-#   end
+  def card_checklist(id,board_id)
+    board_id -= 1
+    list = board[board_id].lists
+    list.each_with_index
+    # p board
+    # board.lists.find {|list| list.}
+
+  end
 
   def board_table
     table = Terminal::Table.new
