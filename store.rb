@@ -39,8 +39,8 @@ class Store
   
 
   def create_list(list_data, board_id)
-    list = find_board(board_id)
-    p list.lists
+    board_id -= 1
+    list = @board[board_id]
     list.lists << Lists.new(**list_data)
     # save
   end
@@ -55,7 +55,12 @@ class Store
   def delete_list(name , board_id)
     board_id -= 1
   
-    list = @board[board_id].find_list_by_name(name)
+    list = @board[board_id]
+    p list.lists
+    # p list
+    list.lists.delete_if {|list| list.name == name}
+      # list.
+    
     # list.name
     # pp list.methods
     # list.delete_if {|list| list.name == name}
@@ -80,9 +85,10 @@ class Store
   end
 
   def update_card(card_id, board_id)
-    list = @board[board_id].lists
-    card = list.find_card(card_id)
-    p card
+    list = @board[board_id].lists[0].find_card(card_id)
+    p list
+    # card = list[1].find_card(card_id)
+    # p card
     #falta la logica y el terminar el update
   end
 

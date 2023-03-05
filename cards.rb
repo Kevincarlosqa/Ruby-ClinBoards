@@ -7,14 +7,12 @@ class Cards
       @members = members
       @labels = labels
       @due_date = due_date
-      @check_list = checklist
+      @checklist = checklist
       # p @check_list
       # p @title
 
     end
-    def find_card_by_id(id)
-      # card = 
-    end
+
     def update(id)
       @title = id[:title] unless id[:title].empty?
       @members = id[:members] unless id[:members].empty?
