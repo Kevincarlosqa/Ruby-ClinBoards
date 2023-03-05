@@ -1,4 +1,5 @@
-class Cards 
+require_relative "checklists"
+class Cards
     @@id_count = 0
      attr_reader :id, :title, :members, :labels, :due_date, :checklist
     def initialize(id:, title:, members:, labels:, due_date:, checklist:[])
@@ -8,6 +9,7 @@ class Cards
       @labels = labels
       @due_date = due_date
       @checklist = checklist
+
       # p @check_list
       # p @title
 
@@ -37,5 +39,23 @@ class Cards
       @@id_count
     end
 end
+
+
+# card_data = {
+# id: 1,
+# title: "Check terminal-table gem",
+# members: ["Diego", "Deyvi", "Wences"],
+# labels: ["investigate"],
+# due_date: "2023-02-19",
+# checklist: [
+#   {
+#     title: "Add gem to gemfile",
+#     completed: true
+#   },
+# ]
+# }
+
+# check = Cards.new(**card_data)
+# pp check.title
 
 
