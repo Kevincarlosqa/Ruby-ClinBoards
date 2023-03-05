@@ -99,6 +99,21 @@ class ClinBoards
         # @store.create_list(data, board_id)
       when "checklist"
         @store.card_checklist(listname,board_id)
+        puts "Checklist options: add | toggle INDEX | delete INDEX"
+        puts "back"
+        print "> "
+        option, index = gets.chomp.split
+
+        case option
+        when "add"
+
+        when "toggle"
+
+        when "delete"
+
+        when "back"
+          break
+        end
         # @store.update_list(listname,board_id)
         
       when "update-card"

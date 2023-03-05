@@ -15,7 +15,7 @@ class Cards
 
     end
     def find_checklist(checklist_id)
-      list = @checklist.find { |check| check.id == card_id }
+      list = @checklist.find { |check| check.name == checklist_id }
       p list
     end
     def update(id)

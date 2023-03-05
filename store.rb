@@ -89,16 +89,35 @@ class Store
   
     list = board[board_id].lists
     checklists = []
+    name_card = []
     id = card_id.to_i
     list.each do |card|
-        checklists << card.cards.find { |card| card.id == id }
+        algo = card.cards.find { |card| card.id == id }
+        
+        if !algo.nil?
+          name_card << algo.title
+          algo.checklist.each do |check|
+          checklists << check.title
         end
-      # checklists << check.cards[index].checklist
-     
-    p checklists.checklist
+      end
+      end
+  
+    check_menu(name_card,checklists)
+    # checklists.each.with_index do |checl,index|
+    #   p checl.checklist[index].title
+    # end
     # p board
     # board.lists.find {|list| list.}
 
+  end
+  def check_menu(name_card = [],checklists = [])
+    puts "Card: #{name_card[0]}"
+    count = 0
+    checklists.each do |check|
+      count += 1
+      puts "[ ] #{count}. #{check}"
+    end
+    puts "-------------------------------------"
   end
 
   def board_table

@@ -53,3 +53,8 @@ end
 # p nuevo.add_checklist
 # p nuevo.toggle_checklist
 # p nuevo.delete_checklist
+data =  {
+  title: "Add gem to gemfile",
+  completed: true
+}
+nuevo = Checklist.new(**data)
