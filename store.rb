@@ -89,6 +89,7 @@ class Store
   
     list = board[board_id].lists
     checklists = []
+    completed = []
     name_card = []
     id = card_id.to_i
     list.each do |card|
@@ -98,11 +99,11 @@ class Store
           name_card << algo.title
           algo.checklist.each do |check|
           checklists << check.title
+          completed << check.completed
         end
       end
       end
-  
-    check_menu(name_card,checklists)
+    check_menu(name_card,checklists,completed)
     # checklists.each.with_index do |checl,index|
     #   p checl.checklist[index].title
     # end
@@ -110,12 +111,17 @@ class Store
     # board.lists.find {|list| list.}
 
   end
-  def check_menu(name_card = [],checklists = [])
+  def check_menu(name_card = [],checklists = [], completed = [])
     puts "Card: #{name_card[0]}"
     count = 0
-    checklists.each do |check|
+    checklists.each_with_index do |check,index|
+      if completed[index] == true
+        equis = "x"
+      else
+        equis = " "
+      end
       count += 1
-      puts "[ ] #{count}. #{check}"
+      puts "[#{equis}] #{count}. #{check}"
     end
     puts "-------------------------------------"
   end
