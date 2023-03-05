@@ -14,7 +14,10 @@ class Cards
       # p @title
 
     end
-
+    def find_checklist(checklist_id)
+      list = @checklist.find { |check| check.id == card_id }
+      p list
+    end
     def update(id)
       @title = id[:title] unless id[:title].empty?
       @members = id[:members] unless id[:members].empty?

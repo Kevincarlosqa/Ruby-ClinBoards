@@ -100,7 +100,7 @@ class ClinBoards
       when "checklist"
         @store.card_checklist(listname,board_id)
         # @store.update_list(listname,board_id)
-
+        
       when "update-card"
         @store.update_card(listname, board_id)
       when "delete-card"

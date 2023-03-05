@@ -84,10 +84,18 @@ class Store
     list.cards.delete_if {|card| card.id == card_id}
   end
 
-  def card_checklist(id,board_id)
+  def card_checklist(card_id,board_id)
     board_id -= 1
+  
     list = board[board_id].lists
-    list.each_with_index
+    checklists = []
+    id = card_id.to_i
+    list.each do |card|
+        checklists << card.cards.find { |card| card.id == id }
+        end
+      # checklists << check.cards[index].checklist
+     
+    p checklists.checklist
     # p board
     # board.lists.find {|list| list.}
 
@@ -143,7 +151,7 @@ dat = {id: 2, name: "name", description: "description", lists: []}
 data = {
   name: "EXTENDED" , description: "DESCRIPCION",
 }
-store = Store.new("store.json")
+# store = Store.new("store.json")
 
 #  p store.find_board(1).name
 #  store.create_board(data)
